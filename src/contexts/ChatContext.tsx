@@ -1,26 +1,28 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { Message } from "@/@types/Message";
+import { chatReducer } from "@/reducers/chatReducer";
+import { createContext, ReactNode, useReducer, useContext } from "react";
 
 type ChatContextType = {
-  chatModal: boolean;
-  goToChatModal: (v: string) => void;
-  username: string
+  chat: Message[];
+  addMessage: (user: string, text: string) => void;
 };
 
 const ChatContext = createContext<ChatContextType | null>(null);
 
-export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
-  const [chatModal, setChatModal] = useState(false);
-  const [username, setUsername] = useState('')
+export const ChatProvider = ({ children }: { children: ReactNode }) => {
+  const [chat, dispatch] = useReducer(chatReducer, []);
 
-  const goToChatModal = (name: string) => {
-    setChatModal((p) => !p);
-    setUsername(name)
+  const addMessage = (user: string, text: string) => {
+    dispatch({
+      type: "add",
+      payload: { user, text },
+    });
   };
 
   return (
-    <ChatContext.Provider value={{ chatModal, goToChatModal, username }}>
+    <ChatContext.Provider value={{ chat, addMessage }}>
       {children}
     </ChatContext.Provider>
   );

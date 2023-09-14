@@ -1,9 +1,15 @@
-import { useChatContext } from "@/contexts/ChatContext";
-import { useState } from "react";
+import { useUserContext } from "@/contexts/UserContext";
+import { KeyboardEvent } from "react";
 
 export const InitialSreeen = () => {
-  const chatContext = useChatContext();
-  const [fieldValue, setFieldValue] = useState("");
+  const userContext = useUserContext();
+
+  const handleKeyUpAction = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.code.toLowerCase() === "enter") {
+      if (userContext?.username.trim() === "") return;
+      userContext?.goToChatModal();
+    }
+  };
 
   return (
     <section className="mt-6 max-w-lg w-full">
@@ -16,15 +22,16 @@ export const InitialSreeen = () => {
           name="name"
           id="name"
           className="p-3 mr-3 flex-1 bg-slate-800 border border-slate-600 outline-none focus:border-slate-300 rounded-md"
-          value={fieldValue}
+          value={userContext?.username}
           onChange={(e) => {
-            setFieldValue(e.target.value);
+            userContext?.setUsername(e.target.value);
           }}
+          onKeyUp={handleKeyUpAction}
         />
         <button
           type="button"
           className="p-3 rounded-md bg-slate-700"
-          onClick={() => chatContext?.goToChatModal(fieldValue)}
+          onClick={userContext?.goToChatModal}
         >
           Iniciar agora
         </button>

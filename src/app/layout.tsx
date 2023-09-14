@@ -1,6 +1,7 @@
-import { ChatProvider } from "@/contexts/ChatContext";
+import { UserProvider } from "@/contexts/UserContext";
 import "./globals.css";
 import type { Metadata } from "next";
+import { ChatProvider } from "@/contexts/ChatContext";
 
 export const metadata: Metadata = {
   title: "Projeto Next",
@@ -15,7 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ChatProvider>{children}</ChatProvider>
+        <UserProvider>
+          <ChatProvider>
+            {children}
+          </ChatProvider>
+        </UserProvider>
       </body>
     </html>
   );
