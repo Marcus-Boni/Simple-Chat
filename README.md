@@ -1,3 +1,5 @@
+<h3>This is a simple chat project with history that I did to improve my knowledge of full ReactJs.</h3>
+
 ## Getting ready 🚀
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
