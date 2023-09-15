@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 The best way to start with this template is using <code>create-next-app</code>.
 
-npx create-next-app project-name -e https://github.com/Marcus-Boni/React-Next-Template
+npx create-next-app project-name -e https://github.com/Marcus-Boni/Simple-Chat.git
 
 If you prefer you can clone this repository and run the following commands inside the project folder:
 
